@@ -150,14 +150,10 @@ body {
 }
 
 .dropdown-content {
-
     display: none;
     position: absolute;
     padding: 63px 0;
     min-width: 160px;
-
-
-
 }
 
 .dropdown:hover .dropdown-content {
@@ -172,6 +168,18 @@ input[type=text]{
     text-transform: uppercase;
     font-weight: normal;
     font-size: 3em;
+
+}
+
+.input-label{
+    font-family: helvetica neue, helvetica, sans-serif;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 3em;
+}
+
+.input-label.right{
+    margin-left: auto;
 
 }
 
@@ -242,9 +250,6 @@ b span {
     text-decoration: none;
     margin-top: 0px;
     position: relative;
-
-
-
 }
 
 .button.blue {
@@ -257,6 +262,18 @@ b span {
     --primary-color: #383e42; /*#03A062;*/
     --secondary-color: #00ff41;
     --tertiary-color: #92e5a1;
+}
+
+.button.danger {
+    --primary-color: #C60000; /*#03A062;*/
+    --secondary-color: #000000;
+    --tertiary-color: #F74242;
+}
+
+.button.warning {
+    --primary-color: #FCFF00; /*#03A062;*/
+    --secondary-color: #000000;
+    --tertiary-color: #EFEF8D;
 }
 
 .button.neon {
@@ -272,10 +289,20 @@ b span {
 }
 
 .button.fill{
+    display: block;
+}
 
-    flex-direction: row;
+.button.fill.right{
 
 }
+button.danger.right{
+    margin-left:auto;
+}
+
+.divright{
+    margin-left:auto;
+}
+
 .button .bottom {
     position: absolute;
     left: 7px;

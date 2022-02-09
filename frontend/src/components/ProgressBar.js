@@ -19,61 +19,65 @@ export default class ProgressBar extends React.Component {
     }
 
     toggle = () => {
-        this.setState({barShrinking: !this.state.barShrinking});
-        if (this.state.barShrinking == true && !this.state.firstIteration && !this.state.firstShrinkStart) {
-            this.state.handleRepComplete();
+        if (this.state.mounted) {
+            this.setState({barShrinking: !this.state.barShrinking});
+            if (this.state.barShrinking == true && !this.state.firstIteration && !this.state.firstShrinkStart) {
+                this.state.handleRepComplete();
+            }
+            if (this.state.firstShrinkStart) {
+                this.setState({firstShrinkStart: !this.state.firstShrinkStart})
+            }
         }
-        if (this.state.firstShrinkStart) {
-            this.setState({firstShrinkStart: !this.state.firstShrinkStart})
-        }
-
-
 
     }
 
     componentDidMount() {
+        this.setState({mounted: true});
         let timeLeftVar = this.state.seconds;
         this.setState({time: timeLeftVar});
-        this.setState({ mounted: true });
 
 
     }
-    componentWillUnmount(){
-        this.setState({ mounted: false });
-    }
 
+    componentWillUnmount() {
+        this.setState({mounted: false});
+        clearInterval(this.timer);
+    }
 
 
     startTimer() {
-        if (this.timer == 0 && this.state.seconds > 0) {
-            this.timer = setInterval(this.countDown, 1000);
+        if (this.state.mounted) {
+            if (this.timer == 0 && this.state.seconds > 0) {
+                this.timer = setInterval(this.countDown, 1000);
+            }
         }
     }
 
     resetTimer() {
-        this.setState({
-            seconds: this.props.seconds,//change
-        });
+        if (this.state.mounted) {
+            this.setState({
+                seconds: this.props.seconds,//change
+            });
+        }
     }
 
     countDown() {
-        // Remove one second, set state so a re-render happens.
-        let seconds = this.state.seconds - 1;
         if (this.state.mounted) {
+            // Remove one second, set state so a re-render happens.
+            let seconds = this.state.seconds - 1;
             this.setState({
-
                 seconds: seconds,
             });
-        }
 
-        // Check if we're at zero.
-        if (seconds == 0 && this.state.mounted) {
-            clearInterval(this.timer);
-            this.setState({firstIteration: false})
-            this.timer = 0;
-            this.toggle()
-            this.resetTimer()
-            this.startTimer()
+            // Check if we're at zero.
+            if (seconds == 0) {
+                clearInterval(this.timer);
+                this.setState({firstIteration: false})
+                this.timer = 0;
+                this.toggle()
+                this.resetTimer()
+                this.startTimer()
+            }
         }
     }
 
@@ -81,7 +85,7 @@ export default class ProgressBar extends React.Component {
         this.startTimer()
         return (
             <div>
-                <div>{this.state.barShrinking ? 'Compress' : 'Decompress'}</div>
+                <div><h1>{this.state.barShrinking ? 'Compress' : 'Decompress'}</h1></div>
                 s: {this.state.seconds - 1}
                 <div className={`bar ${this.state.barShrinking ? "horizTranslate" : ""}`}>
                 </div>

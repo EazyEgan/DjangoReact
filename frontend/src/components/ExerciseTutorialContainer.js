@@ -59,9 +59,11 @@ export default class ExerciseTutorialContainer extends Component {
     };
 
     render() {
+        const exIndex = this.state.currentExerciseIndex;
+        let currentExerciseName = this.state.exerciseList[exIndex].title;
         return (
             <div>
-                <h2> Exercise {this.state.currentExerciseIndex+1}/{this.state.exerciseList.length} </h2>
+                <h2> Exercise {this.state.currentExerciseIndex+1}/{this.state.exerciseList.length}: {currentExerciseName} </h2>
                         {this.renderExercise()}
             </div>
         );

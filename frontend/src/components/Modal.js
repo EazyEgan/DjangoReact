@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Timer from './Countdown'
 import '../style/base.css';
 import '../style/modal.css';
-import '../style/input.css';
+
 import ExerciseTutorialContainer from "./ExerciseTutorialContainer";
 
 export default class CustomModal extends Component {
