@@ -3,7 +3,7 @@ import CountDown from './Countdown'
 import ProgressBar from "./ProgressBar";
 import Button from "./Button";
 import Input from "./Input";
-
+import WorkoutTile from "./WorkoutTile";
 
 
 export default class ExerciseTutorial extends Component {
@@ -19,6 +19,7 @@ export default class ExerciseTutorial extends Component {
             iso_hold: this.props.exercise.iso_hold,
             max: this.props.exercise.max,
             selectNextExercise: this.props.selectNextExercise,
+            handleLogData: this.props.handleLogData,
             currentExerciseIndex: 0,
             previewInProgress: true,
             inputData: false,
@@ -30,7 +31,18 @@ export default class ExerciseTutorial extends Component {
             currentSet: 1,
             countdownLen: 4,
             maxForCurrentExercise: 0,
-            maxList: [],
+            logItem: {
+                exercise_title: "",
+                exercise_id: 0,
+                sets: 0,
+                completed_sets: 0,
+                reps: 0,
+                completed_reps: 0,
+                max: 0,
+            },
+            logList: [
+            ],
+
 
         };
     }
@@ -116,9 +128,25 @@ export default class ExerciseTutorial extends Component {
 
     handleExerciseComplete = () => {
         this.setState({isoInProgress: false, inputData: true})
+
+    }
+
+    createLogData = () => {
+        const newLogItem = {
+            ...this.state.logItem, exercise_title: this.state.title,
+            exercise_id: this.state.exercise.id,
+            sets: this.state.sets,
+            completed_sets: this.state.currentSet,
+            reps: this.state.reps,
+            completed_reps: this.state.currentRep,
+            max: this.state.maxForCurrentExercise,
+        };
+        this.setState({logItem: newLogItem}, this.state.handleLogData(newLogItem));
+
     }
 
     handleNextExercise = () => {
+        this.createLogData()
 
         this.setState({
             previewInProgress: true,
@@ -126,10 +154,8 @@ export default class ExerciseTutorial extends Component {
             isoInProgress: false,
             inputData: false,
             exerciseInProgress: false,
-            maxList: this.state.maxList.concat(this.state.maxForCurrentExercise),
-        })
+                    })
         this.state.selectNextExercise(this.state.maxForCurrentExercise)
-
     }
 
     componentDidMount() {
@@ -179,12 +205,11 @@ export default class ExerciseTutorial extends Component {
                 <h2>Reps:</h2><p className="bodytext">{this.state.reps}</p>
                 <h2>Isometric Hold:</h2><p className="bodytext">{this.state.iso_hold}</p>
                 <h2>Current Max:</h2><p className="bodytext">{this.state.max}</p>
-                    <Button
-                        class={"button green"}
-                        onClick={this.beginExercise}
-                        label={"Begin Workout"}
-                    />
-
+                <Button
+                    class={"button green"}
+                    onClick={this.beginExercise}
+                    label={"Begin Workout"}
+                />
 
 
             </div>
@@ -192,13 +217,14 @@ export default class ExerciseTutorial extends Component {
     }
 
     handleExerciseEarlyEnd = () => {
-        this.setState({isoInProgress: false, inputData: true, exerciseInProgress: false,countdownInProgress: false})
+        this.setState({exerciseInProgress: false, countdownInProgress: false})
+        this.handleExerciseComplete()
 
     }
 
     handleExerciseRetry = () => {
         this.setState({
-            previewInProgress:true,
+            previewInProgress: true,
             inputData: false,
             introCountInProgress: true,
             exerciseInProgress: false,
@@ -207,7 +233,28 @@ export default class ExerciseTutorial extends Component {
             currentRep: 1,
             currentSet: 1,
             countdownLen: 4,
-            maxForCurrentExercise: 0,})
+            maxForCurrentExercise: 0,
+        })
+
+    }
+
+    renderExerciseRecap = () => {
+        const newItems = this.state.workoutList;
+        return (
+            newItems.map(note => (
+                    <div className='' key={note.workout_type}>
+                        <WorkoutTile
+                            key={note.workout_type}
+                            id={note.workout_type}
+                            title={note.title}
+                            areas={note.areas}
+
+                            onClick={() => this.viewItem(note)}
+                        />
+                    </div>
+                )
+            )
+        );
 
     }
 
@@ -216,17 +263,17 @@ export default class ExerciseTutorial extends Component {
             <div>
                 <h2>
                     <div>Set: {this.state.currentSet}/{this.state.sets}</div>
-                <div>Rep: {this.state.currentRep}/{this.state.reps}</div>
+                    <div>Rep: {this.state.currentRep}/{this.state.reps}</div>
 
-            </h2>
+                </h2>
                 <ProgressBar seconds={2} barShrinking={false} handleRepComplete={this.handleRepComplete}/>
-                <div style={{ display: "flex"}}>
+                <div style={{display: "flex"}}>
                     <div className="divright">
-                <Button
-                    class={"button danger"} //one button at a time, no id needed for now
-                    onClick={this.handleExerciseEarlyEnd}
-                    label={"End Exercise"}
-                />
+                        <Button
+                            class={"button danger"} //one button at a time, no id needed for now
+                            onClick={this.handleExerciseEarlyEnd}
+                            label={"End Exercise"}
+                        />
                     </div>
                 </div>
             </div>
@@ -247,33 +294,34 @@ export default class ExerciseTutorial extends Component {
                 <div>{this.state.currentSet}/{this.state.sets}</div>
 
 
-                <div style={{ display: "flex"}}>
+                <div style={{display: "flex"}}>
                     <Input
                         outerClass={"button green fill"}
                         innerClass={"top nopadding-top fill"}
                         label={"Max"}
-                        handleMaxChange={this.handleMaxChange}
-                        maxForCurrentExercise={this.state.maxForCurrentExercise}
+                        inputTextType={"largetext"}
+                        labelClass={"input-label-large"}
+                        handleChange={this.handleMaxChange}
+                        defaultData={this.state.maxForCurrentExercise}
                     />
-                    <div className={"divright"}>
-                    <Button
-                        class={"button green"}
-                        onClick={this.handleNextExercise}
-                        label={"Next Exercise"}
-                    />
-                    <Button
-                        class={"button warning"} //one button at a time, no id needed for now
-                        onClick={this.handleExerciseRetry}
-                        label={"Retry Exercise?"}
 
-                    />
+                    <div className={"divright"}>
+                        <Button
+                            class={"button green"}
+                            onClick={this.handleNextExercise}
+                            label={"Next Exercise"}
+                        />
+                        <Button
+                            class={"button warning"} //one button at a time, no id needed for now
+                            onClick={this.handleExerciseRetry}
+                            label={"Retry Exercise?"}
+
+                        />
                     </div>
 
 
-
-
                 </div>
-                           </div>
+            </div>
         );
 
     }

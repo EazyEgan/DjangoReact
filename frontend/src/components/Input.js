@@ -8,8 +8,10 @@ export default class Input extends Component {
             outerClass: this.props.outerClass,
             innerClass: this.props.innerClass,
             label: this.props.label,
-            handleMaxChange: this.props.handleMaxChange,
-            maxForCurrentExercise: this.props.maxForCurrentExercise,
+            labelClass: this.props.labelClass,
+            inputTextType: this.props.inputTextType,
+            handleChange: this.props.handleChange,
+            defaultData: this.props.defaultData,
         };
     }
 
@@ -17,16 +19,16 @@ export default class Input extends Component {
         return (
             <div >
                 <div style={{ display: "inline-flex"}}>
-                <div className={"input-label"}>{this.state.label}</div>
+                <div className={this.state.labelClass}>{this.state.label}</div>
                 </div>
                 <div style={{ display: "inline-flex"}}>
                 <div className={this.state.outerClass}>
                     <div className={this.state.innerClass}>
 
                         <input
-                            type="text"
-                            defaultValue={this.state.maxForCurrentExercise}
-                            onChange={this.state.handleMaxChange}
+                            type={this.inputTextType}
+                            defaultValue={this.state.defaultData}
+                            onChange={this.state.handleChange}
 
                             style={{height: "100%"}}
                         />

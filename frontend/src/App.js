@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import CustomModal from "./components/Modal";
 import axios from "axios"
-import List from "./components/List";
+import WorkoutTile from "./components/WorkoutTile";
 
 class App extends Component {
     constructor(props) {
@@ -34,26 +34,6 @@ class App extends Component {
         this.setState({modal: !this.state.modal});
     };
 
-    handleSubmit = (item) => {
-
-        /*if (item.id) {
-            axios
-                .put(`/api/workout_data/${item.id}/`, item)
-                .then((res) => this.refreshList());
-            return;
-        }*/
-        axios
-            .post("/api/workout_data/", item)
-            .then((res) => this.refreshList());
-    };
-
-    handleDelete = (item) => {
-        axios
-            .delete(`/api/workouts/${item.id}/`)
-            .then((res) => this.refreshList());
-    };
-
-
 
     viewItem = (item) => {
         this.setState({activeItem: item, modal: !this.state.modal});
@@ -63,15 +43,15 @@ class App extends Component {
     renderNotes = () => {
         const newItems = this.state.workoutList;
         return (
-                newItems.map(note => (
-                <div className='' key={note.workout_type}>
-                    <List
-                        key={note.workout_type}
-                        id={note.workout_type}
-                        title={note.title}
-                        areas={note.areas}
+                newItems.map(workout => (
+                <div className='' key={workout.workout_type}>
+                    <WorkoutTile
+                        key={workout.workout_type}
+                        id={workout.workout_type}
+                        title={workout.title}
+                        areas={workout.areas}
 
-                        onClick={() => this.viewItem(note)}
+                        onClick={() => this.viewItem(workout)}
                     />
                 </div>
                     )

@@ -163,21 +163,29 @@ body {
     flex-wrap: wrap;
 }
 
-input[type=text]{
+input[type=largetext]{
     font-family: helvetica neue, helvetica, sans-serif;
     text-transform: uppercase;
     font-weight: normal;
     font-size: 3em;
 
 }
+input[type=smalltext]{
+    font-family: helvetica neue, helvetica, sans-serif;
+    font-weight: normal;
 
-.input-label{
+}
+
+.input-label-large{
     font-family: helvetica neue, helvetica, sans-serif;
     text-transform: uppercase;
     font-weight: normal;
     font-size: 3em;
 }
-
+.input-label-small{
+    font-family: helvetica neue, helvetica, sans-serif;
+    font-weight: normal;
+}
 .input-label.right{
     margin-left: auto;
 
@@ -292,9 +300,7 @@ b span {
     display: block;
 }
 
-.button.fill.right{
 
-}
 button.danger.right{
     margin-left:auto;
 }

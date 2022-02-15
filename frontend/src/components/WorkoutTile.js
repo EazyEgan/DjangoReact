@@ -1,14 +1,11 @@
 import '../style/base.css';
 import React, {useState} from 'react'
-function List(props) {
+function WorkoutTile(props) {
 
 
     return (
 
         <div className="note">
-
-
-
                 <a href="#" className="button green"
                    onClick={props.onClick}>
                     <div className="bottom square-bottom"></div>
@@ -21,10 +18,8 @@ function List(props) {
                         <div className="button-border button-border-bottom"></div>
                     </div>
                 </a>
-
-
         </div>
     )
 }
 
-export default List;
+export default WorkoutTile;

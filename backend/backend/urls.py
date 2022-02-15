@@ -5,9 +5,10 @@ from backend.apps.workouts import views
 
 router = routers.DefaultRouter()
 router.register(r'workouts', views.WorkoutsView, 'workout')
-router.register(r'workouts_data', views.WorkoutsDataView, 'workout_data')
+#router.register(r'exercise_logs', views.ExerciseLogView, 'exercise_log')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/exercise_logs/',views.logDataView)
 ]
