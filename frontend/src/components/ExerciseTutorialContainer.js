@@ -60,6 +60,7 @@ export default class ExerciseTutorialContainer extends Component {
                 this.handleSubmit(result.logItem)
             )
         )
+        this.state.exitFunction()
 
     }
 
