@@ -301,9 +301,10 @@ export default class ExerciseTutorial extends Component {
                         label={"Max"}
                         inputTextType={"largetext"}
                         labelClass={"input-label-large"}
+                        pattern={"[0-9]*"}
                         handleChange={this.handleMaxChange}
-                        defaultData={this.state.maxForCurrentExercise}
-                    />
+                        previousMax={this.state.maxForCurrentExercise}
+                    />lbs
 
                     <div className={"divright"}>
                         <Button

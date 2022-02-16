@@ -12,6 +12,7 @@ export default class ProgressBar extends React.Component {
             firstIteration: true,
             firstShrinkStart: true,
             mounted: false,
+            reliefMsg: "Let's go!"
         };
         this.timer = 0;
         this.startTimer = this.startTimer.bind(this);
@@ -25,7 +26,7 @@ export default class ProgressBar extends React.Component {
                 this.state.handleRepComplete();
             }
             if (this.state.firstShrinkStart) {
-                this.setState({firstShrinkStart: !this.state.firstShrinkStart})
+                this.setState({firstShrinkStart: !this.state.firstShrinkStart, reliefMsg: "Decompress"})
             }
         }
 
@@ -85,7 +86,7 @@ export default class ProgressBar extends React.Component {
         this.startTimer()
         return (
             <div>
-                <div><h1>{this.state.barShrinking ? 'Compress' : 'Decompress'}</h1></div>
+                <div><h1>{this.state.barShrinking ? 'Compress' : this.state.reliefMsg}</h1></div>
                 s: {this.state.seconds - 1}
                 <div className={`bar ${this.state.barShrinking ? "horizTranslate" : ""}`}>
                 </div>

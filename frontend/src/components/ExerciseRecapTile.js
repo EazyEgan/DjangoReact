@@ -16,8 +16,9 @@ function ExerciseRecapTile(props) {
                 inputTextType={"smalltext"}
                 labelClass={"input-label-small"}
                 handleChange={props.handleChange}
-                defaultData={props.defaultData.logItem.max}
-            />
+                pattern={"[0-9]*"}
+                previousMax={props.defaultData.logItem.max}
+            />lbs
         </div>
     )
 }

@@ -100,12 +100,7 @@ export default class ExerciseTutorialContainer extends Component {
         this.state.logList[index].logItem.max = value //Direct change - bad practice?
     }
 
-    handleChange = (e) => {
-        this.setState({
-            [this.state.logList.e.target.id.max]: e.target.value
-        })
 
-    }
 
     renderExerciseRecapTiles = () => {
         const results = this.state.logList;
