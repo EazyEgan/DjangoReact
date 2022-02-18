@@ -21,7 +21,8 @@ export default class ExerciseTutorialContainer extends Component {
             currentExerciseIndex: 0,
             exitFunction: this.props.exitFunction,
             displayRecap: false,
-            logList: []
+            logList: [],
+            logData: [],
         };
     }
 
@@ -52,6 +53,8 @@ export default class ExerciseTutorialContainer extends Component {
             .catch((err) => console.log(err));//notify new PBs
 
     };
+
+
 
     handleSubmitLogs = () => {
         const results = this.state.logList;

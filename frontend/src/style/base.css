@@ -204,6 +204,19 @@ h2 {
     font-size: 2em;
 }
 
+h2.grey {
+    color: #585757;
+}
+
+h2.nopadding{
+    margin: 0;
+    padding: 0;
+}
+
+h2.smallpadding{
+    margin: 0;
+    padding: 10px 0px 10px 0px;
+}
 
 p.normal {
     font-family: helvetica neue, helvetica, sans-serif;
@@ -258,6 +271,7 @@ b span {
     text-decoration: none;
     margin-top: 0px;
     position: relative;
+    margin-bottom: 10px;
 }
 
 .button.blue {
@@ -308,6 +322,17 @@ button.danger.right{
 .divright{
     margin-left:auto;
 }
+div.exerciseInfo{
+
+    flex-grow: 1;
+}
+
+#exerciseInfoChild {
+    display: inline-block;
+
+
+}
+
 
 .button .bottom {
     position: absolute;

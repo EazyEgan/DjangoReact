@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 import CustomModal from "./components/Modal";
 import axios from "axios"
 import WorkoutTile from "./components/WorkoutTile";
+import {Line} from '@nivo/line'
 
 class App extends Component {
     constructor(props) {
@@ -43,21 +44,24 @@ class App extends Component {
     renderNotes = () => {
         const newItems = this.state.workoutList;
         return (
-                newItems.map(workout => (
-                <div className='' key={workout.workout_type}>
-                    <WorkoutTile
-                        key={workout.workout_type}
-                        id={workout.workout_type}
-                        title={workout.title}
-                        areas={workout.areas}
+            newItems.map(workout => (
+                    <div className='' key={workout.workout_type}>
+                        <WorkoutTile
+                            key={workout.workout_type}
+                            id={workout.workout_type}
+                            title={workout.title}
+                            areas={workout.areas}
 
-                        onClick={() => this.viewItem(workout)}
-                    />
-                </div>
-                    )
+                            onClick={() => this.viewItem(workout)}
+                        />
+                    </div>
                 )
+            )
         );
     };
+
+
+
 
     render() {
         return (
@@ -67,6 +71,7 @@ class App extends Component {
 
 
                 </div>
+
                 {this.state.modal ? (
                     <CustomModal
 
