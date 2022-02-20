@@ -5,7 +5,7 @@ import Input from "./Input";
 function ExerciseRecapTile(props) {
 
     return (
-        <div>
+        <div key={props.defaultData.logItem.exercise_id}>
             <h2>{props.defaultData.logItem.exercise_title}</h2>
             <p className="bodytext">{props.defaultData.logItem.completed_sets}/{props.defaultData.logItem.sets}</p>
             <p className="bodytext">{props.defaultData.logItem.completed_reps}/{props.defaultData.logItem.reps}</p>

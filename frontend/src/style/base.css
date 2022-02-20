@@ -21,7 +21,7 @@ body {
     background: repeating-linear-gradient(0deg, transparent, transparent 1px, #d9eae6 1px, #d9eae6 40px),
     repeating-linear-gradient(-90deg, transparent, transparent 1px, #d9eae6 1px, #d9eae6 40px),
     linear-gradient(90deg, #30FF79, transparent, #30FF79, transparent, #30FF79, transparent, #30FF79, transparent, #30FF79, transparent),
-    linear-gradient(315deg,#30FF79, #d9eae6, #30FF79, #d9eae6, #30FF79, #d9eae6, #30FF79, #d9eae6, #30FF79, #d9eae6);
+    linear-gradient(315deg, #30FF79, #d9eae6, #30FF79, #d9eae6, #30FF79, #d9eae6, #30FF79, #d9eae6, #30FF79, #d9eae6);
 
     background-size: 10px 10px, 10px 10px, 2600% 2600%, 2600% 2600%;
 
@@ -163,30 +163,32 @@ body {
     flex-wrap: wrap;
 }
 
-input[type=largetext]{
-    font-family: helvetica neue, helvetica, sans-serif;
-    text-transform: uppercase;
-    font-weight: normal;
-    font-size: 3em;
-
-}
-input[type=smalltext]{
-    font-family: helvetica neue, helvetica, sans-serif;
-    font-weight: normal;
-
-}
-
-.input-label-large{
+input[type=largetext] {
     font-family: helvetica neue, helvetica, sans-serif;
     text-transform: uppercase;
     font-weight: normal;
     font-size: 3em;
 }
-.input-label-small{
+
+input[type=smalltext] {
+    font-family: helvetica neue, helvetica, sans-serif;
+    font-weight: normal;
+
+}
+
+.input-label-large {
+    font-family: helvetica neue, helvetica, sans-serif;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 3em;
+}
+
+.input-label-small {
     font-family: helvetica neue, helvetica, sans-serif;
     font-weight: normal;
 }
-.input-label.right{
+
+.input-label.right {
     margin-left: auto;
 
 }
@@ -208,12 +210,12 @@ h2.grey {
     color: #585757;
 }
 
-h2.nopadding{
+h2.nopadding {
     margin: 0;
     padding: 0;
 }
 
-h2.smallpadding{
+h2.smallpadding {
     margin: 0;
     padding: 10px 0px 10px 0px;
 }
@@ -234,14 +236,11 @@ p.subheading {
 }
 
 p.bodytext {
-
     font-weight: 500;
     font-size: 1em;
-
 }
 
 b {
-
     display: block;
     font-family: helvetica neue, helvetica, sans-serif;
     line-height: 1.15em;
@@ -252,7 +251,6 @@ b {
     letter-spacing: 0.025em;
     opacity: 0.75;
     text-align: center;
-
 }
 
 b span {
@@ -262,7 +260,6 @@ b span {
 }
 
 #intro {
-
     margin: 0px auto 0;
 }
 
@@ -281,7 +278,7 @@ b span {
 }
 
 .button.green {
-    --primary-color: #383e42; /*#03A062;*/
+    --primary-color: #152228; /*#03A062;*/
     --secondary-color: #00ff41;
     --tertiary-color: #92e5a1;
 }
@@ -310,27 +307,36 @@ b span {
     --tertiary-color: #fff;
 }
 
-.button.fill{
+.button.fill {
     display: block;
 }
 
 
-button.danger.right{
-    margin-left:auto;
+button.danger.right {
+    margin-left: auto;
 }
 
-.divright{
-    margin-left:auto;
+.divright {
+    margin-left: auto;
 }
-div.exerciseInfo{
 
-    flex-grow: 1;
+div.exerciseInfo {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+
+
+div.columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
 }
 
 #exerciseInfoChild {
-    display: inline-block;
-
-
+    display: table-cell;
+    vertical-align: middle;
 }
 
 
@@ -339,7 +345,6 @@ div.exerciseInfo{
     left: 7px;
     top: 7px;
     width: 100%;
-
     background-color: var(--primary-color);
     display: block;
     -webkit-transition: all .15s ease-out;
@@ -357,16 +362,16 @@ div.exerciseInfo{
     border: 2px solid var(--secondary-color);
 }
 
-.default-bottom{
+.default-bottom {
     height: 100%;
 }
 
 .square-bottom {
     height: 2px;
-    padding-top: 100%;
+    padding-top: calc(100% + 3px);
 }
 
-.default-top{
+.default-top {
     height: 100%;
     padding: 24px 34px 22px 34px;
 }
@@ -378,7 +383,7 @@ div.exerciseInfo{
     padding-bottom: 50%;
 }
 
-.nopadding-top{
+.nopadding-top {
     display: flex;
     flex-direction: column;
     height: 100%;

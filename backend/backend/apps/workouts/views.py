@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.shortcuts import render
 from django.utils import timezone
 from rest_framework import viewsets, status
@@ -17,23 +19,34 @@ class WorkoutsView(viewsets.ModelViewSet):
 @api_view(['GET', 'POST'])
 @ensure_csrf_cookie
 def logDataView(request):
-
-    if request.method== "GET":
+    if request.method == "GET":
         if request.query_params['param'] == 'latest':
             logs = Log.objects.filter(
                 exercise_id__id=request.query_params["exercise_id"]
             ).reverse()[0]
 
         elif request.query_params['param'] == 'year':
-            fields = ["date","max"]
+            fields = ["date", "max"]
             logs = Log.objects.filter(
-                    exercise_id__id=request.query_params["exercise_id"]
-                ).order_by('-date')[:365]
+                exercise_id__id=request.query_params["exercise_id"]
+            ).order_by('date')[:365]
 
             serializer = LogSerializer(logs, many=True,
-                                          fields=fields)
-            print(serializer.data)
-            return Response(serializer.data)
+                                       fields=fields)
+            print(serializer.data[0:len(serializer.data)])
+
+            # Must convert date to Python Date object then *1000 and change
+            # 'date' to 'y' and 'max' to 'x'
+
+            response_data = []
+            for entry in serializer.data:
+                data_item = {}
+                data_item['x'] = (entry['date'])[0:10]
+                data_item['y'] = entry['max']
+                response_data.append(data_item)
+                print(data_item)
+
+            return Response(response_data)
 
 
 
@@ -46,7 +59,7 @@ def logDataView(request):
 
         return Response(serializer.data)
 
-    elif request.method== "POST":
+    elif request.method == "POST":
 
         serializer = LogSerializer(data=request.data)
 
@@ -73,10 +86,6 @@ def logDataView(request):
                 serializer_data = augmented_serializer_data
                 """
 
-
-
             return Response(serializer_data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-

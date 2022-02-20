@@ -28,6 +28,7 @@ export default class ExerciseTutorial extends Component {
             countdownInProgress: false,
             introCountInProgress: true,
             isoInProgress: false,
+            showGraph: false,
             currentRep: 1,
             currentSet: 1,
             countdownLen: 4,
@@ -172,11 +173,13 @@ export default class ExerciseTutorial extends Component {
     };
 
     componentDidMount() {
+        this.getLogData('year')
         this.refreshList();
     }
 
     componentDidUpdate(prevProps) {
         // Typical usage (don't forget to compare props):
+
         if (this.props.exercise !== prevProps.exercise) {
             this.setState({
                 exercise: this.props.exercise,
@@ -196,7 +199,8 @@ export default class ExerciseTutorial extends Component {
                 currentSet: 1,
                 countdownLen: 4,
                 maxForCurrentExercise: 0,
-            })
+            }, () => {this.getLogData('year')})
+
         }
     }
 
@@ -205,18 +209,15 @@ export default class ExerciseTutorial extends Component {
     };
 
     beginExercise = () => {
-        this.setState({previewInProgress: false, introCountInProgress: true})
+        this.setState({previewInProgress: false, introCountInProgress: true, logData: []})
 
 
     }
 
     renderExercisePreview = () => {
         return (
-            <div style={{columnCount: "2"}}>
-                <div style={{
-                    display: "flex",
-                    flexDirection: "column"
-                }}>
+            <div className={"columns"}>
+
                     <div className={"exerciseInfo"}>
                         <div>
                             <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Target Areas: &nbsp;</h2></div>
@@ -256,11 +257,14 @@ export default class ExerciseTutorial extends Component {
                             label={"Begin Workout"}
                         />
                     </div>
-                </div>
+
                 <div>
-                    {this.state.logData ?
-                    this.renderMaxGraph():
-                        null}
+
+                    {this.state.logData && this.state.logData.length > 0 ? <div> <h2 className={"smallpadding"} > Previous Workout Data </h2>  {this.renderMaxGraph()}
+                        </div>
+                  : null
+                        }
+
                 </div>
 
             </div>
@@ -317,12 +321,12 @@ export default class ExerciseTutorial extends Component {
                     data={[
                         {
                             "id": "Personal Bests",
-                            "color": "hsl(305, 70%, 50%)",
+                            "color": "#92e5a1",
                             "data": this.state.logData
                         },
 
                     ]}
-
+                    colors = "#97E3D5"
                     margin={{top: 50, right: 110, bottom: 50, left: 60}}
                     xScale={{type: 'point'}}
                     yScale={{
@@ -386,6 +390,7 @@ export default class ExerciseTutorial extends Component {
                         }
                     ]}
                 />
+
             </div>
         )
     }
