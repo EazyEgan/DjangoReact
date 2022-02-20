@@ -49,34 +49,8 @@ export default class ExerciseTutorial extends Component {
         };
     }
 
-    renderProgressBar = () => {
-
-
-    }
-
-    renderCustomTimer = () => {
-
-
-    }
-
-
-    renderExerciseData = () => {
-
-
-    }
-
     toggleCountDown = () => {
         this.setState({countdownInProgress: !this.state.countdownInProgress})
-
-    }
-
-    startExercise = () => {
-        this.toggleCountDown()
-        this.setState({exerciseInProgress: !this.state.exerciseInProgress, countdownLen: 4})
-    }
-
-    startCountDown = () => {
-        this.toggleCountDown()
 
     }
 
@@ -121,11 +95,6 @@ export default class ExerciseTutorial extends Component {
         } else {
             this.handleSetComplete()
         }
-    }
-
-    handleIsoStart = () => {
-        this.setState({isoInProgress: true, countdownInProgress: true, countdownLen: 7})
-
     }
 
     handleExerciseComplete = () => {
@@ -178,8 +147,6 @@ export default class ExerciseTutorial extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        // Typical usage (don't forget to compare props):
-
         if (this.props.exercise !== prevProps.exercise) {
             this.setState({
                 exercise: this.props.exercise,
@@ -199,7 +166,9 @@ export default class ExerciseTutorial extends Component {
                 currentSet: 1,
                 countdownLen: 4,
                 maxForCurrentExercise: 0,
-            }, () => {this.getLogData('year')})
+            }, () => {
+                this.getLogData('year')
+            })
 
         }
     }
@@ -210,60 +179,59 @@ export default class ExerciseTutorial extends Component {
 
     beginExercise = () => {
         this.setState({previewInProgress: false, introCountInProgress: true, logData: []})
-
-
     }
 
     renderExercisePreview = () => {
         return (
             <div className={"columns"}>
 
-                    <div className={"exerciseInfo"}>
-                        <div>
-                            <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Target Areas: &nbsp;</h2></div>
-                            <div id={"exerciseInfoChild"}><h2 className={"grey smallpadding"}> {this.state.area}</h2>
-                            </div>
+                <div className={"exerciseInfo"}>
+                    <div>
+                        <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Target Areas: &nbsp;</h2></div>
+                        <div id={"exerciseInfoChild"}><h2 className={"grey smallpadding"}> {this.state.area}</h2>
                         </div>
-                        <div>
-                            <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Tips: &nbsp;</h2></div>
-                            <div id={"exerciseInfoChild"}><h2 className={"grey smallpadding"}>{this.state.tips}</h2>
-                            </div>
-                        </div>
-                        <div>
-                            <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Sets: &nbsp;</h2></div>
-                            <div id={"exerciseInfoChild"}><h2 className={"grey smallpadding"}>{this.state.sets}</h2>
-                            </div>
-                        </div>
-                        <div>
-                            <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Reps: &nbsp;</h2></div>
-                            <div id={"exerciseInfoChild"}><h2 className={"grey smallpadding"}>{this.state.reps}</h2>
-                            </div>
-                        </div>
-                        <div>
-                            <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Isometric Hold:  &nbsp;</h2>
-                            </div>
-                            <div id={"exerciseInfoChild"}><h2
-                                className={"grey smallpadding"}>{this.state.iso_hold} seconds</h2></div>
-                        </div>
-                        <div>
-                            <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Current Max: &nbsp;</h2></div>
-                            <div id={"exerciseInfoChild"}><h2 className={"grey smallpadding"}>{this.state.max}</h2>
-                            </div>
-                        </div>
-
-                        <Button
-                            class={"button green"}
-                            onClick={this.beginExercise}
-                            label={"Begin Workout"}
-                        />
                     </div>
+                    <div>
+                        <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Tips: &nbsp;</h2></div>
+                        <div id={"exerciseInfoChild"}><h2 className={"grey smallpadding"}>{this.state.tips}</h2>
+                        </div>
+                    </div>
+                    <div>
+                        <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Sets: &nbsp;</h2></div>
+                        <div id={"exerciseInfoChild"}><h2 className={"grey smallpadding"}>{this.state.sets}</h2>
+                        </div>
+                    </div>
+                    <div>
+                        <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Reps: &nbsp;</h2></div>
+                        <div id={"exerciseInfoChild"}><h2 className={"grey smallpadding"}>{this.state.reps}</h2>
+                        </div>
+                    </div>
+                    <div>
+                        <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Isometric Hold:  &nbsp;</h2>
+                        </div>
+                        <div id={"exerciseInfoChild"}><h2
+                            className={"grey smallpadding"}>{this.state.iso_hold} seconds</h2></div>
+                    </div>
+                    <div>
+                        <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Current Max: &nbsp;</h2></div>
+                        <div id={"exerciseInfoChild"}><h2 className={"grey smallpadding"}>{this.state.max}</h2>
+                        </div>
+                    </div>
+
+                    <Button
+                        class={"button green"}
+                        onClick={this.beginExercise}
+                        label={"Begin Workout"}
+                    />
+                </div>
 
                 <div>
 
-                    {this.state.logData && this.state.logData.length > 0 ? <div> <h2 className={"smallpadding"} > Previous Workout Data </h2>  {this.renderMaxGraph()}
+                    {this.state.logData && this.state.logData.length > 0 ?
+                        <div><h2 className={"smallpadding"}> Previous Workout Data </h2>  {this.renderMaxGraph()}
                         </div>
-                  : null
-                        }
+                        : null
+                    }
 
                 </div>
 
@@ -274,7 +242,6 @@ export default class ExerciseTutorial extends Component {
     handleExerciseEarlyEnd = () => {
         this.setState({exerciseInProgress: false, countdownInProgress: false})
         this.handleExerciseComplete()
-
     }
 
     handleExerciseRetry = () => {
@@ -290,7 +257,6 @@ export default class ExerciseTutorial extends Component {
             countdownLen: 4,
             maxForCurrentExercise: 0,
         })
-
     }
 
     renderExerciseRecap = () => {
@@ -303,7 +269,6 @@ export default class ExerciseTutorial extends Component {
                             id={note.workout_type}
                             title={note.title}
                             areas={note.areas}
-
                             onClick={() => this.viewItem(note)}
                         />
                     </div>
@@ -314,9 +279,7 @@ export default class ExerciseTutorial extends Component {
     }
     renderMaxGraph = () => {
         return (
-
             <div style={{height: 415}}>
-
                 <ResponsiveLine
                     data={[
                         {
@@ -326,7 +289,7 @@ export default class ExerciseTutorial extends Component {
                         },
 
                     ]}
-                    colors = "#97E3D5"
+                    colors="#97E3D5"
                     margin={{top: 50, right: 110, bottom: 50, left: 60}}
                     xScale={{type: 'point'}}
                     yScale={{
@@ -390,10 +353,10 @@ export default class ExerciseTutorial extends Component {
                         }
                     ]}
                 />
-
             </div>
         )
     }
+
     renderExerciseActive = () => {
         return (
             <div>
@@ -425,45 +388,41 @@ export default class ExerciseTutorial extends Component {
     renderExerciseComplete = () => {
         return (
             <div>
-
                 <div className={"exerciseInfo"}>
-
                     <div>
                         <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Completed Sets: &nbsp;</h2></div>
                         <div id={"exerciseInfoChild"}><h2
-                            className={"grey smallpadding"}>{this.state.currentSet }/{this.state.sets}</h2></div>
+                            className={"grey smallpadding"}>{this.state.currentSet}/{this.state.sets}</h2></div>
                     </div>
                     <div>
                         <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Completed Reps: &nbsp;</h2></div>
                         <div id={"exerciseInfoChild"}><h2
-                            className={"grey smallpadding"}>{this.state.currentRep }/{this.state.reps}</h2></div>
+                            className={"grey smallpadding"}>{this.state.currentRep}/{this.state.reps}</h2></div>
                     </div>
                     <div>
                         <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Completed Isometric Hold
                             Time:  &nbsp;</h2></div>
                         <div id={"exerciseInfoChild"}><h2
-                            className={"grey smallpadding"}>{this.state.iso_hold * (this.state.currentSet )}seconds</h2>
+                            className={"grey smallpadding"}>{this.state.iso_hold * (this.state.currentSet)}seconds</h2>
                         </div>
                     </div>
                     <div>
                         <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Current Max: </h2></div>
                         <div id={"exerciseInfoChild"}><h2 className={"grey smallpadding"}>{this.state.max}</h2></div>
                     </div>
-
                 </div>
-
 
                 <div style={{display: "flex"}}>
                     <Input
                         outerClass={"button green fill"}
                         innerClass={"top nopadding-top fill"}
-                        label={"Max"}
-                        inputTextType={"largetext"}
-                        labelClass={"input-label-large"}
+                        label={"Max: "}
+                        inputTextType={"mediumtext"}
+                        labelClass={"input-label-medium-bold"}
                         pattern={"[0-9]*"}
                         handleChange={this.handleMaxChange}
                         previousMax={this.state.maxForCurrentExercise}
-                    />lbs
+                    /><h2 className={"nopadding"}> lbs </h2>
 
                     <div className={"divright"}>
                         <Button
@@ -502,7 +461,6 @@ export default class ExerciseTutorial extends Component {
     renderIsoCount = () => {
         return (
             <div>
-
                 <CountDown
                     seconds={8}
                     handleCountDownFinish={this.handleCountDownFinish}
@@ -525,14 +483,15 @@ export default class ExerciseTutorial extends Component {
                                         {this.state.isoInProgress ? this.renderIsoCount() :
                                             <div>
                                                 {this.state.inputData ? this.renderExerciseComplete() :
-                                                    ""
+                                                    null
                                                 }
                                             </div>
                                         }
                                     </div>
                                 }
                             </div>
-                        }</div>
+                        }
+                    </div>
                 }
             </div>
         );

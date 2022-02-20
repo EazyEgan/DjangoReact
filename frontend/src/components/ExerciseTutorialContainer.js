@@ -1,14 +1,7 @@
-import Timer from './Timer'
-import ProgressBar from "./ProgressBar";
 import ExerciseTutorial from "./ExerciseTutorial";
-
 import React, {Component} from "react";
-
-import CustomModal from "./Modal";
 import axios from "axios"
-import WorkoutTile from "./WorkoutTile";
 import ExerciseRecapTile from "./ExerciseRecapTile";
-import Input from "./Input";
 import Button from "./Button";
 import Cookies from "js-cookie"
 

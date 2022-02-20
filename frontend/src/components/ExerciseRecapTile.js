@@ -12,13 +12,13 @@ function ExerciseRecapTile(props) {
             <Input
                 outerClass={"button green "}
                 innerClass={"top nopadding-top "}
-                label={"Max"}
+                label={"Max: "}
                 inputTextType={"smalltext"}
                 labelClass={"input-label-small"}
                 handleChange={props.handleChange}
                 pattern={"[0-9]*"}
                 previousMax={props.defaultData.logItem.max}
-            />lbs
+            />
         </div>
     )
 }

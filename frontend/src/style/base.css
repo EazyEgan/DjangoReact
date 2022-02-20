@@ -170,10 +170,15 @@ input[type=largetext] {
     font-size: 3em;
 }
 
+input[type=mediumtext] {
+    font-family: helvetica neue, helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 2em;
+}
+
 input[type=smalltext] {
     font-family: helvetica neue, helvetica, sans-serif;
     font-weight: normal;
-
 }
 
 .input-label-large {
@@ -181,6 +186,12 @@ input[type=smalltext] {
     text-transform: uppercase;
     font-weight: normal;
     font-size: 3em;
+}
+
+.input-label-medium-bold {
+    font-family: helvetica neue, helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 2em;
 }
 
 .input-label-small {
