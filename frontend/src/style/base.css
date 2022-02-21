@@ -286,36 +286,54 @@ b span {
     --primary-color: #2acdc1;
     --secondary-color: #04049d;
     --tertiary-color: #fff;
+    --engaged-text-colour: #2acdc1;
+    --engaged-border-colour: #2acdc1;
+    --engaged-bottom-colour: #fff;
 }
 
 .button.green {
     --primary-color: #152228; /*#03A062;*/
     --secondary-color: #00ff41;
     --tertiary-color: #92e5a1;
+    --engaged-text-colour: #152228;
+    --engaged-border-colour: #152228;
+    --engaged-bottom-colour: #92e5a1;
 }
 
 .button.danger {
     --primary-color: #C60000; /*#03A062;*/
     --secondary-color: #000000;
     --tertiary-color: #F74242;
+    --engaged-text-colour: #C60000;
+    --engaged-border-colour: #C60000;
+    --engaged-bottom-colour: #F74242;
 }
 
 .button.warning {
     --primary-color: #FCFF00; /*#03A062;*/
     --secondary-color: #000000;
     --tertiary-color: #EFEF8D;
+    --engaged-text-colour: #000000;
+    --engaged-border-colour: #FCFF00;
+    --engaged-bottom-colour: #EFEF8D;
 }
 
 .button.neon {
     --primary-color: #110E23; /*#03A062;*/
     --secondary-color: #ff2468;
     --tertiary-color: #F54379;
+    --engaged-text-colour:#110E23;
+    --engaged-border-colour:#110E23;
+    --engaged-bottom-colour: #F54379;
 }
 
 .button.mono {
     --primary-color: #110E23; /*#03A062;*/
     --secondary-color: #fff;
     --tertiary-color: #fff;
+    --engaged-text-colour: #110E23;
+    --engaged-border-colour: #110E23;
+    --engaged-bottom-colour: #fff;
 }
 
 .button.fill {
@@ -426,16 +444,16 @@ div.columns {
 .button:hover .bottom {
     left: 0;
     top: 0;
-    background-color: var(--tertiary-color);
+    background-color: var(--engaged-bottom-colour);
 }
 
 .button:hover .top .label {
-    color: var(--primary-color);
+    color: var(--engaged-text-colour);
 }
 
 .button-border {
     position: absolute;
-    background-color: var(--primary-color);
+    background-color: var(--engaged-border-colour);
     -webkit-transition: all .25s ease-out;
     -moz-transition: all .25s ease-out;
     -o-transition: all .25s ease-out;

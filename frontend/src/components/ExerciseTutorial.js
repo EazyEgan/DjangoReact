@@ -31,6 +31,8 @@ export default class ExerciseTutorial extends Component {
             showGraph: false,
             currentRep: 1,
             currentSet: 1,
+            completedReps: 0,
+            completedSets: 0,
             countdownLen: 4,
             maxForCurrentExercise: 0,
             logItem: {
@@ -72,13 +74,15 @@ export default class ExerciseTutorial extends Component {
             this.setState({introCountInProgress: false, exerciseInProgress: true})
         }
         if (this.state.isoInProgress && this.state.currentSet == this.state.sets) {
+            this.setState({completedSets: this.state.completedSets+1})
             this.handleExerciseComplete()
         } else if (this.state.isoInProgress && this.state.currentSet < this.state.sets) {
             this.setState({
                 isoInProgress: false,
                 exerciseInProgress: true,
                 currentRep: 1,
-                currentSet: this.state.currentSet + 1
+                currentSet: this.state.currentSet + 1,
+                completedSets: this.state.completedSets + 1,
             })
         } else {
             this.setState({introCountInProgress: false})
@@ -91,7 +95,7 @@ export default class ExerciseTutorial extends Component {
 
     handleRepComplete = () => {
         if (this.state.currentRep != this.state.reps) {
-            this.setState({currentRep: this.state.currentRep + 1})
+            this.setState({currentRep: this.state.currentRep + 1,completedReps:this.state.completedReps+1})
         } else {
             this.handleSetComplete()
         }
@@ -279,7 +283,7 @@ export default class ExerciseTutorial extends Component {
     }
     renderMaxGraph = () => {
         return (
-            <div style={{height: 415}}>
+            <div style={{height: 400}}>
                 <ResponsiveLine
                     data={[
                         {
@@ -392,18 +396,18 @@ export default class ExerciseTutorial extends Component {
                     <div>
                         <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Completed Sets: &nbsp;</h2></div>
                         <div id={"exerciseInfoChild"}><h2
-                            className={"grey smallpadding"}>{this.state.currentSet}/{this.state.sets}</h2></div>
+                            className={"grey smallpadding"}>{this.state.completedSets}/{this.state.sets}</h2></div>
                     </div>
                     <div>
                         <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Completed Reps: &nbsp;</h2></div>
                         <div id={"exerciseInfoChild"}><h2
-                            className={"grey smallpadding"}>{this.state.currentRep}/{this.state.reps}</h2></div>
+                            className={"grey smallpadding"}>{this.state.completedReps}/{this.state.reps * this.state.sets}</h2></div>
                     </div>
                     <div>
                         <div id={"exerciseInfoChild"}><h2 className={"smallpadding"}>Completed Isometric Hold
                             Time:  &nbsp;</h2></div>
                         <div id={"exerciseInfoChild"}><h2
-                            className={"grey smallpadding"}>{this.state.iso_hold * (this.state.currentSet)}seconds</h2>
+                            className={"grey smallpadding"}>{this.state.iso_hold * (this.state.completedSets)}seconds</h2>
                         </div>
                     </div>
                     <div>
