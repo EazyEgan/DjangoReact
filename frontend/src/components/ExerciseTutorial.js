@@ -97,6 +97,7 @@ export default class ExerciseTutorial extends Component {
         if (this.state.currentRep != this.state.reps) {
             this.setState({currentRep: this.state.currentRep + 1,completedReps:this.state.completedReps+1})
         } else {
+            this.setState({completedReps:this.state.completedReps+1})
             this.handleSetComplete()
         }
     }
