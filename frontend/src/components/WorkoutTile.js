@@ -5,7 +5,7 @@ function WorkoutTile(props) {
 
     return (
 
-        <div className="note">
+        <div className="tile">
                 <a href="#" className="button green"
                    onClick={props.onClick}>
                     <div className="bottom square-bottom"></div>

@@ -1,9 +1,8 @@
 import React, {Component} from "react";
-
+import "./style/base.css"
 import CustomModal from "./components/Modal";
 import axios from "axios"
 import WorkoutTile from "./components/WorkoutTile";
-import {Line, ResponsiveLine} from '@nivo/line'
 import {ResponsiveCalendar} from "@nivo/calendar";
 
 class App extends Component {
@@ -2861,7 +2860,7 @@ class App extends Component {
     renderCalendar = () => {
         return (
 
-            <div style={{height: 300,width: 1000}}>
+
 
                 <ResponsiveCalendar
                     data={this.data}
@@ -2888,7 +2887,6 @@ class App extends Component {
                         }
                     ]}
                 />
-            </div>
         )
     }
 
@@ -2896,7 +2894,7 @@ class App extends Component {
         const newItems = this.state.workoutList;
         return (
             newItems.map(workout => (
-                    <div className='' key={workout.workout_type}>
+                    <div className='tile' key={workout.workout_type}>
                         <WorkoutTile
                             key={workout.workout_type}
                             id={workout.workout_type}
@@ -2917,13 +2915,14 @@ class App extends Component {
     render() {
         return (
             <div className='App'>
-                <div id='container'>
+                <div className='tile_container'>
                     {this.renderTiles()}
-                    <h2 class="nopadding">Workout History:</h2>
-                    {this.renderCalendar()}
-
                 </div>
 
+                <div className="calendar_container">
+                <h2 class="nopadding">Workout History:</h2>
+                {this.renderCalendar()}
+                </div>
                 {this.state.modal ? (
                     <CustomModal
                         activeItem={this.state.activeItem}

@@ -3,18 +3,18 @@
     border: 3px solid #26C6DA;
     background-color: #26C6DA;
     border-radius: 40px;
-    width: 1000px;
+    width: 100%;
     height: 20px;
     display: inline-block;
-
     text-align: center;
     display: flex;
-    transition:  transform 2s;
+    transition:  transform 3s;
     transition-timing-function: ease-in-out;
+
 }
 
 .bar.horizTranslate {
-    transform: scale(0.5, 1);
+    transform: scale(0.3, 1);
 }
 
 

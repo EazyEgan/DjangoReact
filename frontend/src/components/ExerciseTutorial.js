@@ -370,7 +370,7 @@ export default class ExerciseTutorial extends Component {
                     <div>Rep: {this.state.currentRep}/{this.state.reps}</div>
 
                 </h2>
-                <ProgressBar seconds={2} barShrinking={false} handleRepComplete={this.handleRepComplete}/>
+                <ProgressBar seconds={3} barShrinking={false} handleRepComplete={this.handleRepComplete}/>
                 <div style={{display: "flex"}}>
                     <div className="divright">
                         <Button
