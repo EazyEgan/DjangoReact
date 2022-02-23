@@ -6,6 +6,7 @@ import Input from "./Input";
 import WorkoutTile from "./WorkoutTile";
 import {ResponsiveLine} from "@nivo/line";
 import axios from "axios"
+import {ResponsiveCalendar} from "@nivo/calendar";
 
 export default class ExerciseTutorial extends Component {
     constructor(props) {
@@ -147,7 +148,7 @@ export default class ExerciseTutorial extends Component {
     };
 
     componentDidMount() {
-        this.getLogData('year')
+        this.getLogData('year');
         this.refreshList();
     }
 
@@ -294,6 +295,19 @@ export default class ExerciseTutorial extends Component {
                         },
 
                     ]}
+                    tooltip={function (point) {
+
+                        if (point.point.data === undefined) return null
+                        return (
+                            <span style={{color: point.point.borderColor, backgroundColor: 'black', padding: '10px'}}>
+Date: {point.point.data.x} &nbsp; Max: {point.point.data.y}
+
+                            </span>
+
+                        )
+
+                    }
+                    }
                     colors="#97E3D5"
                     margin={{top: 50, right: 110, bottom: 50, left: 60}}
                     xScale={{type: 'point'}}

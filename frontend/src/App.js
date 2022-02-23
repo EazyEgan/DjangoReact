@@ -41,15 +41,15 @@ class App extends Component {
     };
     data = [
         {
-            "value": 195,
+            "value": 1,
             "day": "2022-06-21"
         },
         {
-            "value": 315,
+            "value": 2,
             "day": "2017-01-27"
         },
         {
-            "value": 367,
+            "value": 3,
             "day": "2022-03-24"
         },
         {
@@ -2861,32 +2861,49 @@ class App extends Component {
         return (
 
 
+            <ResponsiveCalendar
+                data={this.data}
+                from="2022-01-01"
+                to="2022-12-31"
+                emptyColor="#eeeeee"
+                colors={['#92e5a1', '#97e3d5', '#00ff41']}
+                margin={{top: 40, right: 40, bottom: 40, left: 40}}
+                yearSpacing={40}
+                monthBorderColor="#ffffff"
+                dayBorderWidth={2}
+                dayBorderColor="#ffffff"
+                tooltip={function (data) {
 
-                <ResponsiveCalendar
-                    data={this.data}
-                    from="2022-01-01"
-                    to="2022-12-31"
-                    emptyColor="#eeeeee"
-                    colors={[ '#92e5a1', '#97e3d5', '#00ff41', '#152228' ]}
-                    margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
-                    yearSpacing={40}
-                    monthBorderColor="#ffffff"
-                    dayBorderWidth={2}
-                    dayBorderColor="#ffffff"
-                    //tooltip={function(n){}}
-                    legends={[
-                        {
-                            anchor: 'bottom-right',
-                            direction: 'row',
-                            translateY: 36,
-                            itemCount: 4,
-                            itemWidth: 42,
-                            itemHeight: 36,
-                            itemsSpacing: 14,
-                            itemDirection: 'right-to-left'
-                        }
-                    ]}
-                />
+                    if (data.value === undefined) return null
+                    return (
+                        <span style={{color: data.color, backgroundColor: 'black', padding: '10px'}}>
+                                        {data.day} :
+
+                            {data.value==1 ? ' Push' : null
+
+                            }
+                            {data.value==2? ' Pull' : null
+
+                            }
+                            {data.value==3? ' Legs' : null}
+
+                            </span>
+                    )
+                }
+                }
+                legends={[
+                    {
+                        anchor: 'bottom-right',
+                        direction: 'row',
+                        translateY: 36,
+                        itemCount: 4,
+                        itemWidth: 42,
+                        itemHeight: 36,
+                        itemsSpacing: 14,
+                        itemDirection: 'right-to-left'
+                    }
+                ]}
+            />
         )
     }
 
@@ -2910,8 +2927,6 @@ class App extends Component {
     };
 
 
-
-
     render() {
         return (
             <div className='App'>
@@ -2920,8 +2935,8 @@ class App extends Component {
                 </div>
 
                 <div className="calendar_container">
-                <h2 class="nopadding">Workout History:</h2>
-                {this.renderCalendar()}
+                    <h2 class="nopadding">Workout History:</h2>
+                    {this.renderCalendar()}
                 </div>
                 {this.state.modal ? (
                     <CustomModal
