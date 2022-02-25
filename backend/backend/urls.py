@@ -10,5 +10,6 @@ router.register(r'workouts', views.WorkoutsView, 'workout')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('api/exercise_logs/',views.logDataView)
+    path('api/exercise_logs/',views.logDataView),
+    path('api/workout_log/',views.calendarDataView)
 ]

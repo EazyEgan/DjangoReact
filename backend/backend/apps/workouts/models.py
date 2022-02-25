@@ -14,7 +14,7 @@ class Workout(models.Model):
         (PULL, 'Pull'),
         (LEGS, 'Legs'),
     ]
-    id = models.IntegerField(primary_key=True)
+
     title = models.CharField(max_length=120)
     areas = models.CharField(max_length=120)
     workout_type = models.CharField(
@@ -28,7 +28,7 @@ class Workout(models.Model):
 
 
 class Exercise(models.Model):
-    id = models.IntegerField(primary_key=True)
+
     workout = models.ForeignKey(Workout, related_name="exercises", on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     area = models.CharField(max_length=120)
@@ -44,9 +44,21 @@ class Exercise(models.Model):
         return self.title
 
 
+class WorkoutCalendarLog(models.Model):
+
+    workout = models.ForeignKey(Workout, related_name="workout_cal_logs", on_delete=models.CASCADE)
+    date = models.DateField('date completed', auto_now_add=True)
+    def _str_(self):
+        return self.date
+
+
+#Create model with date and workout type and have legend on calendar that tells which is which, then get workout data by searching by date.
+
 class Log(models.Model):
-    id = models.IntegerField(primary_key=True)
-    exercise_id = models.ForeignKey(Exercise, related_name="logs", on_delete=models.CASCADE) #Logs not included with exercise data as standard
+
+    exercise = models.ForeignKey(Exercise, related_name="logs", on_delete=models.CASCADE) #Logs not included with exercise data as standard
+    workout_calendar_log_id = models.ForeignKey(WorkoutCalendarLog, related_name="logs",
+                                    on_delete=models.CASCADE)
     sets = models.IntegerField(default=0)
     reps = models.IntegerField(default=0)
     max = models.IntegerField(default=0)
@@ -63,3 +75,4 @@ class Log(models.Model):
 
     def _str_(self):
         return self.title
+

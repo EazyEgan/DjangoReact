@@ -13,6 +13,7 @@ export default class ExerciseTutorial extends Component {
         super(props);
         this.state = {
             exercise: this.props.exercise,
+            workoutId: this.props.workoutId,
             title: this.props.exercise.title,
             area: this.props.exercise.area,
             tips: this.props.exercise.tips,
@@ -38,7 +39,7 @@ export default class ExerciseTutorial extends Component {
             maxForCurrentExercise: 0,
             logItem: {
                 exercise_title: "",
-                exercise_id: 0,
+                exercise: 0,
                 sets: 0,
                 completed_sets: 0,
                 reps: 0,
@@ -111,7 +112,8 @@ export default class ExerciseTutorial extends Component {
     createLogData = () => {
         const newLogItem = {
             ...this.state.logItem, exercise_title: this.state.title,
-            exercise_id: this.state.exercise.id,
+            workout_calendar_log_id: this.state.workoutId,
+            exercise: this.state.exercise.id,
             sets: this.state.sets,
             completed_sets: this.state.currentSet,
             reps: this.state.reps,

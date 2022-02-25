@@ -10,6 +10,7 @@ export default class ExerciseTutorialContainer extends Component {
         super(props);
         this.state = {
             exerciseList: this.props.exerciseList,
+            workoutId: this.props.workoutId,
             exerciseInProgress: false,
             currentExerciseIndex: 0,
             exitFunction: this.props.exitFunction,
@@ -35,12 +36,12 @@ export default class ExerciseTutorialContainer extends Component {
             .catch((err) => console.log(err));
     };
 
-    handleSubmit = (item) => {
+    handleSubmit = (item, destination) => {
         console.log(item)
         axios
-            .post("/api/exercise_logs/", item,{
+            .post(destination, item, {
                 headers: {
-                    'X-CSRFToken': Cookies.get('csrftoken')
+                    'X-CSRFToken': this.getCookie()
                 }
             })
             .catch((err) => console.log(err));//notify new PBs
@@ -49,15 +50,14 @@ export default class ExerciseTutorialContainer extends Component {
 
 
 
-    handleSubmitLogs = () => {
+    handleSubmitLogs = async () => {
+        await this.handleSubmit({'workout': this.state.workoutId}, "/api/workout_log/")
         const results = this.state.logList;
-
         results.map((result, index) => (
-                this.handleSubmit(result.logItem)
+                this.handleSubmit(result.logItem, "/api/exercise_logs/")
             )
         )
         this.state.exitFunction()
-
     }
 
     handleLogData = (log_data) => {
@@ -71,7 +71,7 @@ export default class ExerciseTutorialContainer extends Component {
         })
     }
 
-    selectNextExercise = (max) => {
+    selectNextExercise = () => {
         if (this.state.exerciseList.length == this.state.currentExerciseIndex + 1) {
             this.setState({displayRecap: true})
 
@@ -84,6 +84,7 @@ export default class ExerciseTutorialContainer extends Component {
         const currentExercise = this.state.exerciseList[this.state.currentExerciseIndex];
         return (
             <ExerciseTutorial
+                workoutId={this.state.workoutId}
                 exercise={currentExercise}
                 selectNextExercise={this.selectNextExercise}
                 handleLogData={this.handleLogData}

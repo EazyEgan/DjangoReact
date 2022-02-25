@@ -33,6 +33,7 @@ export default class CustomModal extends Component {
                 <div className="modal-content">
                     <span className="close" onClick={toggle}>&times;</span>
                         <ExerciseTutorialContainer
+                            workoutId = {this.state.activeItem.id}
                         exerciseList = {this.state.activeItem.exercises}
                         exitFunction = {toggle}
                         />
